@@ -25,7 +25,9 @@ public class Client {
     private Integer id;
     private String names;
     private String phone;
-    private String nationalid;
+    
+    @Column(name = "national_id")
+    private String nationalID;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -34,7 +36,7 @@ public class Client {
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
     
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
     private Wallet wallet;
     
     @Override
@@ -66,12 +68,12 @@ public class Client {
         this.phone = phone;
     }
 
-    public String getNationalid() {
-        return nationalid;
+    public String getNationalID() {
+        return nationalID;
     }
 
-    public void setNationalid(String nationalid) {
-        this.nationalid = nationalid;
+    public void setNationalID(String nationalID) {
+        this.nationalID = nationalID;
     }
     
     public Status getStatus() {
