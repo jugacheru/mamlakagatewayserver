@@ -25,6 +25,7 @@ public class Client {
     private Integer id;
     private String names;
     private String phone;
+    private String nationalid;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -65,6 +66,14 @@ public class Client {
         this.phone = phone;
     }
 
+    public String getNationalid() {
+        return nationalid;
+    }
+
+    public void setNationalid(String nationalid) {
+        this.nationalid = nationalid;
+    }
+    
     public Status getStatus() {
         return status;
     }
