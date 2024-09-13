@@ -32,6 +32,13 @@ public class Transaction {
     private int balance;
     
     @Enumerated(EnumType.STRING)
+    @Column(name = "channel")
+    private Channel channel;
+    
+    @Column(name = "transaction_code")
+    private String transactionCode;
+    
+    @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
     private TransactionType transactionType;
     
@@ -54,7 +61,7 @@ public class Transaction {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public Wallet getWallet() {
         return wallet;
     }
@@ -77,6 +84,22 @@ public class Transaction {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    public String getTransactionCode() {
+        return transactionCode;
+    }
+
+    public void setTransactionCode(String transactionCode) {
+        this.transactionCode = transactionCode;
     }
 
     public TransactionType getTransactionType() {
@@ -102,4 +125,6 @@ public class Transaction {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+    
 }
