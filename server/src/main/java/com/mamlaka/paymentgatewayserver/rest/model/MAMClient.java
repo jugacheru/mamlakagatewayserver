@@ -1,7 +1,7 @@
 
 package com.mamlaka.paymentgatewayserver.rest.model;
 
-import com.mamlaka.paymentgatewayserver.database.model.Status;
+import com.mamlaka.paymentgatewayserver.database.model.ClientStatus;
 
 /**
  *
@@ -13,7 +13,7 @@ public class MAMClient {
     private String phone;
     private String nationalID;
     private String createdAt;
-    private Status clientStatus;
+    private ClientStatus clientStatus;
 
     public void setClientID(int clientID){
         this.clientID = clientID;
@@ -55,11 +55,11 @@ public class MAMClient {
         this.createdAt = createdAt;
     }
     
-    public Status getClientStatus() {
+    public ClientStatus getClientStatus() {
         return clientStatus;
     }
 
-    public void setClientStatus(Status clientStatus) {
+    public void setClientStatus(ClientStatus clientStatus) {
         this.clientStatus = clientStatus;
     }
 }

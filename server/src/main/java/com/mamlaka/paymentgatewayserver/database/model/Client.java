@@ -24,14 +24,13 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String names;
-    private String phone;
     
     @Column(name = "national_id")
     private String nationalID;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Status status;
+    private ClientStatus status;
     
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
@@ -41,7 +40,7 @@ public class Client {
     
     @Override
     public String toString() {
-        return "Client [names=" + this.names + ", phone=" + this.phone + "]";
+        return "Client [names=" + this.names + ", national ID=" + this.nationalID + "]";
     }
 
     public Integer getId() {
@@ -60,14 +59,6 @@ public class Client {
         this.names = names;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getNationalID() {
         return nationalID;
     }
@@ -76,11 +67,11 @@ public class Client {
         this.nationalID = nationalID;
     }
     
-    public Status getStatus() {
+    public ClientStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(ClientStatus status) {
         this.status = status;
     }
 

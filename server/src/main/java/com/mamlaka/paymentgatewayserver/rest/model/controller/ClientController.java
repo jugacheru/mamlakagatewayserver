@@ -2,7 +2,7 @@
 package com.mamlaka.paymentgatewayserver.rest.model.controller;
 
 import com.mamlaka.paymentgatewayserver.database.model.Client;
-import com.mamlaka.paymentgatewayserver.database.model.Status;
+import com.mamlaka.paymentgatewayserver.database.model.ClientStatus;
 import com.mamlaka.paymentgatewayserver.database.service.ClientService;
 import com.mamlaka.paymentgatewayserver.rest.model.MAMClient;
 import com.mamlaka.paymentgatewayserver.rest.model.controller.util.ClientControllerUtil;
@@ -36,7 +36,7 @@ public class ClientController {
     public ResponseEntity<MAMClient> createUser(@RequestBody Client client){
         
         MAMClient mAMClient = clientControllerUtil.createClient(client, clientService);
-        HttpStatusCode httpStatusCode = mAMClient.getClientStatus() == Status.CLIENT_CREATED ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
+        HttpStatusCode httpStatusCode = mAMClient.getClientStatus() == ClientStatus.CLIENT_CREATED ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
         
         return new ResponseEntity<>(mAMClient, httpStatusCode);
     }

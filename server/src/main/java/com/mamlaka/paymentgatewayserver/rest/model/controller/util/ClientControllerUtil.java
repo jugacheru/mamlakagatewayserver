@@ -2,7 +2,7 @@
 package com.mamlaka.paymentgatewayserver.rest.model.controller.util;
 
 import com.mamlaka.paymentgatewayserver.database.model.Client;
-import com.mamlaka.paymentgatewayserver.database.model.Status;
+import com.mamlaka.paymentgatewayserver.database.model.ClientStatus;
 import com.mamlaka.paymentgatewayserver.database.service.ClientService;
 import com.mamlaka.paymentgatewayserver.rest.model.MAMClient;
 import org.slf4j.Logger;
@@ -21,14 +21,14 @@ public class ClientControllerUtil {
         MAMClient mAMClient = new MAMClient();
 
         try {
-            client.setStatus(Status.CLIENT_CREATED);
+            client.setStatus(ClientStatus.CLIENT_CREATED);
             clientService.save(client);
 
             mAMClient.setClientID(client.getId());
             mAMClient.setClientStatus(client.getStatus());
         } 
         catch (Exception e) {
-            mAMClient.setClientStatus(Status.ERROR_CREATING_CLIENT);
+            mAMClient.setClientStatus(ClientStatus.ERROR_CREATING_CLIENT);
             
             logger.error(e.getMessage());
         }

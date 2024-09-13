@@ -7,6 +7,8 @@ package com.mamlaka.paymentgatewayserver.database.model;
  */
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +32,14 @@ public class Wallet {
     @JoinColumn(name = "client_id")
     private Client client;
     
+    private String phone;
+    
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private WalletStatus status;
 
     public Integer getId() {
         return id;
@@ -49,11 +57,27 @@ public class Wallet {
         this.client = client;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public WalletStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(WalletStatus status) {
+        this.status = status;
     }
 }
