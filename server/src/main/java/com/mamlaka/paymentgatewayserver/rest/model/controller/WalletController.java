@@ -1,13 +1,12 @@
 
 package com.mamlaka.paymentgatewayserver.rest.model.controller;
 
-import com.mamlaka.paymentgatewayserver.database.model.ClientStatus;
+import com.mamlaka.paymentgatewayserver.database.model.Transaction;
 import com.mamlaka.paymentgatewayserver.database.model.Wallet;
 import com.mamlaka.paymentgatewayserver.database.model.WalletStatus;
+import com.mamlaka.paymentgatewayserver.database.service.TransactionService;
 import com.mamlaka.paymentgatewayserver.database.service.WalletService;
-import com.mamlaka.paymentgatewayserver.rest.model.MAMClient;
 import com.mamlaka.paymentgatewayserver.rest.model.MAMWallet;
-import com.mamlaka.paymentgatewayserver.rest.model.controller.util.ClientControllerUtil;
 import com.mamlaka.paymentgatewayserver.rest.model.controller.util.WalletControllerUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +32,9 @@ public class WalletController {
     
     @Autowired
     WalletService walletService;
+    
+    @Autowired
+    TransactionService transactionService;
     
     private final WalletControllerUtil walletControllerUtil = new WalletControllerUtil();
     
@@ -58,6 +61,15 @@ public class WalletController {
     public ResponseEntity<MAMWallet> getWallet(@RequestParam(value = "walletid") int walletid){
         
         MAMWallet mAMWallet = walletControllerUtil.getWallet(walletid, walletService);
+        HttpStatusCode httpStatusCode = mAMWallet != null ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        
+        return new ResponseEntity<>(mAMWallet, httpStatusCode);
+    }
+    
+    @GetMapping("/fundwallet")
+    public ResponseEntity<MAMWallet> fundWallet(@RequestBody Transaction transaction){
+        
+        MAMWallet mAMWallet = walletControllerUtil.fundWallet(transaction, walletService, transactionService);
         HttpStatusCode httpStatusCode = mAMWallet != null ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         
         return new ResponseEntity<>(mAMWallet, httpStatusCode);

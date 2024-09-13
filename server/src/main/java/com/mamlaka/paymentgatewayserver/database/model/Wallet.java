@@ -4,7 +4,6 @@ package com.mamlaka.paymentgatewayserver.database.model;
  *
  * @author Julius
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,12 +38,6 @@ public class Wallet {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private WalletStatus status;
-
-    @JsonProperty("client")
-    private void unpackNested(Integer clientID) {
-        this.client = new Client();
-        client.setId(clientID);
-    }
 
     public Integer getId() {
         return id;

@@ -125,6 +125,4 @@ public class Transaction {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
-    
 }

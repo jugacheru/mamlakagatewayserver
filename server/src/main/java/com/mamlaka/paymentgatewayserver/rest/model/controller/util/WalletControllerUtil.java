@@ -1,8 +1,11 @@
 
 package com.mamlaka.paymentgatewayserver.rest.model.controller.util;
 
+import com.mamlaka.paymentgatewayserver.database.model.Transaction;
+import com.mamlaka.paymentgatewayserver.database.model.TransactionType;
 import com.mamlaka.paymentgatewayserver.database.model.Wallet;
 import com.mamlaka.paymentgatewayserver.database.model.WalletStatus;
+import com.mamlaka.paymentgatewayserver.database.service.TransactionService;
 import com.mamlaka.paymentgatewayserver.database.service.WalletService;
 import com.mamlaka.paymentgatewayserver.rest.model.MAMWallet;
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class WalletControllerUtil {
             mAMWallet.setWalletID(wallet.getId());
             mAMWallet.setClientName(wallet.getClient().getNames());
             mAMWallet.setPhone(wallet.getPhone());
+            mAMWallet.setBalance(wallet.getBalance());
             mAMWallet.setNationalID(wallet.getClient().getNationalID());
             mAMWallet.setCreatedAt(wallet.getCreatedAt());
             mAMWallet.setWalletStatus(wallet.getStatus());
@@ -74,6 +78,7 @@ public class WalletControllerUtil {
                 mAMWallet.setWalletID(wallet.getId());
                 mAMWallet.setClientName(wallet.getClient().getNames());
                 mAMWallet.setPhone(wallet.getPhone());
+                mAMWallet.setBalance(wallet.getBalance());
                 mAMWallet.setNationalID(wallet.getClient().getNationalID());
                 mAMWallet.setCreatedAt(wallet.getCreatedAt());
                 mAMWallet.setWalletStatus(wallet.getStatus());
@@ -83,5 +88,32 @@ public class WalletControllerUtil {
         }
         
         return mAMWallets;
+    }
+    
+    public MAMWallet fundWallet(Transaction transaction, WalletService walletService, TransactionService transactionService) {
+        MAMWallet mAMWallet = null;
+        
+        Wallet wallet = walletService.get(transaction.getWallet().getId());
+        
+        if(wallet != null){
+            int newBalance = wallet.getBalance() + transaction.getAmount();
+            
+            wallet.setBalance(newBalance);
+            walletService.save(wallet);
+            
+            transaction.setTransactionType(TransactionType.DEPOSIT);
+            transactionService.save(transaction);
+            
+            mAMWallet = new MAMWallet();            
+            mAMWallet.setWalletID(wallet.getId());
+            mAMWallet.setClientName(wallet.getClient().getNames());
+            mAMWallet.setPhone(wallet.getPhone());
+            mAMWallet.setBalance(wallet.getBalance());
+            mAMWallet.setNationalID(wallet.getClient().getNationalID());
+            mAMWallet.setCreatedAt(wallet.getCreatedAt());
+            mAMWallet.setWalletStatus(wallet.getStatus());
+        }
+        
+        return mAMWallet;
     }
 }
