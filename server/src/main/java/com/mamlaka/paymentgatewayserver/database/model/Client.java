@@ -24,6 +24,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String names;
+    private String phone;
     
     @Column(name = "national_id")
     private String nationalID;
@@ -57,6 +58,14 @@ public class Client {
 
     public void setNames(String names) {
         this.names = names;
+    }
+    
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getNationalID() {

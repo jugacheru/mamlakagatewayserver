@@ -1,10 +1,10 @@
-
 package com.mamlaka.paymentgatewayserver.database.model;
 
 /**
  *
  * @author Julius
  */
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,7 +20,6 @@ import java.util.Date;
  *
  * @author Julius
  */
-
 @Entity
 public class Wallet {
 
@@ -31,15 +30,21 @@ public class Wallet {
     @OneToOne
     @JoinColumn(name = "client_id")
     private Client client;
-    
     private String phone;
-    
+    private int balance;
+
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private WalletStatus status;
+
+    @JsonProperty("client")
+    private void unpackNested(Integer clientID) {
+        this.client = new Client();
+        client.setId(clientID);
+    }
 
     public Integer getId() {
         return id;
@@ -63,6 +68,14 @@ public class Wallet {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     public Date getCreatedAt() {

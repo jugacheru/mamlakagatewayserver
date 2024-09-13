@@ -1,12 +1,12 @@
 package com.mamlaka.paymentgatewayserver;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  *
  * @author Julius
  */
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class PaymentgatewayserverApplication {

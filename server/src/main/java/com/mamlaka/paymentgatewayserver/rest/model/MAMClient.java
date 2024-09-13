@@ -2,6 +2,7 @@
 package com.mamlaka.paymentgatewayserver.rest.model;
 
 import com.mamlaka.paymentgatewayserver.database.model.ClientStatus;
+import java.util.Date;
 
 /**
  *
@@ -12,7 +13,7 @@ public class MAMClient {
     private String names;
     private String phone;
     private String nationalID;
-    private String createdAt;
+    private Date createdAt;
     private ClientStatus clientStatus;
 
     public void setClientID(int clientID){
@@ -47,11 +48,11 @@ public class MAMClient {
         this.nationalID = nationalID;
     }
     
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
     
